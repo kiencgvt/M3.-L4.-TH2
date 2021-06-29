@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-Route::prefix('/tasks') ->group(function () {
+    return view('home');
+});
+
+Route::group(['prefix' => 'tasks'], function () {
     Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/create', [TaskController::class, 'create'])->name('tasks.create');
-    Route::post('/', [TaskController::class, 'store'])->name('tasks.store');
-
+    Route::post('/create', [TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+    Route::post('/{id}/edit', [TaskController::class, 'update'])->name('tasks.update');
+    Route::get('/{id}/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
