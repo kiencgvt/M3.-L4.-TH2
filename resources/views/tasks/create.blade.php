@@ -35,5 +35,14 @@
                 <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>
             </form>
         </div>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 @endsection
